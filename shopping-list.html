@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #666;
+      }
+
+      div {
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>A basic shopping list</h1>
+
+    <div>
+      <p>This is a basic shopping list application. </p>
+      <p>You can enter items in the textbox and click <b>"Add item"</b>. An item will be added.</p>
+      <p>You may click <b>"Delete"</b> if you wish to remove the item from the list.</p>
+    </div>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item">
+      <button>Add item</button>
+    </div>
+
+    <ul>
+
+    </ul>
+
+    <!-- Read me:
+      We are trying to create a shopping list that 
+      you can add items into the list by entering it in textbox
+      you should be able to delete them from list by pressing button
+      once pressed delete, input should be emptied and focused ready for you to add more
+    -->
+    <script>
+      //reference list, input element, button elements so that we could manipulate them
+      const input = document.querySelector("input");
+      const button = document.querySelector("button");
+      const list = document.querySelector('ul');
+
+      // create a function to run in response to add item button being clicked
+
+      function addItem (){
+      // once addItem is clicked, 
+      // value of the input element is stored, then input value cleared
+
+        let inputValue = input.value;
+        input.value = "";
+        // create three new elements 
+        // li to contain list items 
+        const newItem = document.createElement("li");
+        // span to contain text content
+        const span = document.createElement("span");
+        // button to register delete function and focus method upon triggering the event
+        const btn = document.createElement("button");
+        // append button and span as children of li item
+        newItem.appendChild(span);
+        newItem.appendChild(btn);
+        // set text content of span element to input element value
+        span.textContent = inputValue;
+        // set text content of button to delete
+        btn.textContent = "Delete";
+        // append list item as child of the list
+        list.appendChild(newItem);
+        // attach event handler to delete button so that when clicked, it deletes the list item
+        btn.addEventListener("click",()=>{
+          newItem.remove();
+          // use focus() method to focus input element ready for entering next list item 
+          input.focus();
+          });
+
+    };
+
+    button.addEventListener("click",addItem);
+
+
+
+
+    </script>
+  </body>
+</html>
